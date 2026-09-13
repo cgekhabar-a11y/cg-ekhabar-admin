@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisements — CG ई खबर Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>CG ई खबर</h2>
+                <p>Ad Manager</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    📊 Dashboard
+                </a>
+
+                <a href="ads.html" class="nav-item active">
+                    📢 Advertisements
+                </a>
+                <a href="ads.html?filter=active" class="nav-item nav-sub" id="nav-active">
+                    • Active
+                </a>
+                <a href="ads.html?filter=scheduled" class="nav-item nav-sub" id="nav-scheduled">
+                    • Scheduled
+                </a>
+                <a href="ads.html?filter=expired" class="nav-item nav-sub" id="nav-expired">
+                    • Expired
+                </a>
+                <a href="ads.html?filter=paused" class="nav-item nav-sub" id="nav-paused">
+                    • Paused
+                </a>
+                <a href="add-ad.html" class="nav-item nav-sub">
+                    + Add Advertisement
+                </a>
+
+                <a href="reports.html" class="nav-item">
+                    📈 Reports
+                </a>
+
+                <a href="#" class="nav-item nav-logout" onclick="handleLogout(); return false;">
+                    🚪 Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                    <h1 id="pageTitle">All Advertisements</h1>
+                </div>
+                <div class="user-info">
+                    <a href="add-ad.html" class="btn-primary" style="text-decoration: none;">
+                        + Add New Ad
+                    </a>
+                </div>
+            </div>
+
+            <!-- FILTERS & SEARCH -->
+            <div class="card">
+                <div class="filters-bar">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="🔍 Search by advertiser, campaign, or title..."
+                    >
+                    <select id="filterSelect">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="expired">Expired</option>
+                        <option value="paused">Paused</option>
+                    </select>
+                    <select id="screenFilter">
+                        <option value="all">All Screens</option>
+                        <option value="HOME">Home</option>
+                        <option value="LATEST_NEWS">Latest News</option>
+                        <option value="CATEGORY">Category</option>
+                        <option value="DISTRICT_NEWS">District News</option>
+                        <option value="SEARCH">Search</option>
+                        <option value="NEWS_DETAIL">News Detail</option>
+                        <option value="PROFILE">Profile</option>
+                    </select>
+                    <button class="btn-secondary" onclick="clearFilters()">Clear</button>
+                </div>
+            </div>
+
+            <!-- ADS TABLE -->
+            <div class="card">
+                <div class="card-title">
+                    <span id="adsCount">Loading...</span>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Banner</th>
+                                <th>Advertiser</th>
+                                <th>Campaign</th>
+                                <th>Screen</th>
+                                <th>Placement</th>
+                                <th>Priority</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Status</th>
+                                <th>ON/OFF</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adsTableBody">
+                            <tr>
+                                <td colspan="11" style="text-align: center; padding: 32px;">
+                                    Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- DELETE CONFIRM MODAL -->
+    <div id="deleteModal" class="loading-overlay" style="display: none;">
+        <div style="background: white; padding: 32px; border-radius: 12px; max-width: 400px; text-align: center;">
+            <h3 style="margin-bottom: 16px; color: #E31E24;">⚠️ Delete Confirmation</h3>
+            <p style="margin-bottom: 24px; color: #666;">
+                क्या आप यह advertisement permanently delete करना चाहते हैं?
+            </p>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+                <button class="btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                <button class="btn-primary" onclick="confirmDelete()" style="background: #EF4444;">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ads.js"></script>
+</body>
+</html>

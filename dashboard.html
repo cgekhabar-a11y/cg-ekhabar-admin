@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — CG ई खबर Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>CG ई खबर</h2>
+                <p>Ad Manager</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    📊 Dashboard
+                </a>
+
+                <a href="ads.html" class="nav-item">
+                    📢 Advertisements
+                </a>
+                <a href="ads.html?filter=active" class="nav-item nav-sub">
+                    • Active
+                </a>
+                <a href="ads.html?filter=scheduled" class="nav-item nav-sub">
+                    • Scheduled
+                </a>
+                <a href="ads.html?filter=expired" class="nav-item nav-sub">
+                    • Expired
+                </a>
+                <a href="ads.html?filter=paused" class="nav-item nav-sub">
+                    • Paused
+                </a>
+                <a href="add-ad.html" class="nav-item nav-sub">
+                    + Add Advertisement
+                </a>
+
+                <a href="reports.html" class="nav-item">
+                    📈 Reports
+                </a>
+
+                <a href="#" class="nav-item nav-logout" onclick="handleLogout(); return false;">
+                    🚪 Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <span id="userEmail">Loading...</span>
+                </div>
+            </div>
+
+            <!-- STATS CARDS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Ads</div>
+                    <div class="stat-value" id="statTotalAds">—</div>
+                </div>
+
+                <div class="stat-card success">
+                    <div class="stat-label">Active Ads</div>
+                    <div class="stat-value" id="statActiveAds">—</div>
+                </div>
+
+                <div class="stat-card info">
+                    <div class="stat-label">Scheduled</div>
+                    <div class="stat-value" id="statScheduledAds">—</div>
+                </div>
+
+                <div class="stat-card danger">
+                    <div class="stat-label">Expired</div>
+                    <div class="stat-value" id="statExpiredAds">—</div>
+                </div>
+            </div>
+
+            <!-- ANALYTICS CARDS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Impressions</div>
+                    <div class="stat-value" id="statImpressions">—</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Total Clicks</div>
+                    <div class="stat-value" id="statClicks">—</div>
+                </div>
+
+                <div class="stat-card success">
+                    <div class="stat-label">CTR</div>
+                    <div class="stat-value" id="statCTR">—</div>
+                </div>
+            </div>
+
+            <!-- QUICK ADD -->
+            <div class="card">
+                <div class="card-title">⚡ Quick Actions</div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="add-ad.html" class="btn-primary" style="text-decoration: none; display: inline-block;">
+                        + Add New Advertisement
+                    </a>
+                    <a href="ads.html" class="btn-secondary" style="text-decoration: none; display: inline-block;">
+                        📋 View All Ads
+                    </a>
+                    <a href="reports.html" class="btn-secondary" style="text-decoration: none; display: inline-block;">
+                        📈 View Reports
+                    </a>
+                </div>
+            </div>
+
+            <!-- RECENT ADS -->
+            <div class="card">
+                <div class="card-title">🕒 Recent Advertisements</div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Banner</th>
+                                <th>Advertiser</th>
+                                <th>Campaign</th>
+                                <th>Screen</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentAdsBody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 32px;">
+                                    Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
